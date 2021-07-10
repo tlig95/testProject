@@ -2,30 +2,33 @@ package com.example.demo;
 
 import com.example.demo.controller.DemandsController;
 import com.example.demo.entity.DemandEntity;
+import com.example.demo.service.DemandService;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Date;
 import java.sql.Timestamp;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(value = DemandsController.class)
+@WebMvcTest(DemandsController.class)
 class DemoApplicationTests {
+	@MockBean
+	DemandService demandService;
 	@Autowired
-	private MockMvc mockMvc;
+	private WebApplicationContext webApplicationContext;
+	@Autowired
+	MockMvc  mockMvc;
 	@Test
-	void testAddDemandsWithoutUser() throws Exception {
+	public void testMockMvc(){
+		Assert.assertNotNull(mockMvc);
+	}
+	void testAddDemandsWithoutUser() {
 		DemandEntity demand = new DemandEntity();
 		demand.setPickUpLocation("PickUpLocation");
 		demand.setDropOffLocation("dropOffLocation");
@@ -35,16 +38,10 @@ class DemoApplicationTests {
 		demand.setEngine("Engine");
 		demand.setInfotaSystem("InfotaSystem");
 		demand.setInteriorDesign("InteriorDesign");
-		RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.post("/demands/save/")
-				.accept(MediaType.APPLICATION_JSON).content(String.valueOf(demand))
-				.contentType(MediaType.APPLICATION_JSON);
-
-		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-
-		MockHttpServletResponse response = result.getResponse();
-
-		Assert.assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+//		RequestBuilder requestBuilder = MockMvcRequestBuilders
+//				.post("/students/Student1/courses")
+//				.accept(MediaType.APPLICATION_JSON).content(exampleCourseJson)
+//				.contentType(MediaType.APPLICATION_JSON);
 	}
 
 }

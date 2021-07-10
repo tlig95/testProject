@@ -16,8 +16,16 @@ public class UserEntity {
     String gender;
     @JsonFormat(pattern="dd/MM/yyyy")
     Date birthdate;
-/*    @OneToMany
-    List<DemandEntity> demandList;*/
+
+    public UserEntity() {
+    }
+
+    public UserEntity(int id, String name, String gender, Date birthdate) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.birthdate = birthdate;
+    }
 
     public int getId() {
         return id;
@@ -51,11 +59,5 @@ public class UserEntity {
         this.birthdate = birthdate;
     }
 
-/*    public List<DemandEntity> getDemandList() {
-        return demandList;
-    }
 
-    public void setDemandList(List<DemandEntity> demandList) {
-        this.demandList = demandList;
-    }*/
 }

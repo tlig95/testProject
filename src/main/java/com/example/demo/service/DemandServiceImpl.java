@@ -47,7 +47,7 @@ public class DemandServiceImpl implements DemandService{
     }
 
     @Override
-    public List<Integer> findByUserID(int id) {
+    public List<DemandEntity> findByUserID(int id) {
         return demandRepository.findByIdUser(id);
     }
 }

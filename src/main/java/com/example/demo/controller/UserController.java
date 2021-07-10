@@ -37,7 +37,7 @@ public class UserController {
         if(user==null || user.getId()==0)
             return new ResponseEntity("user in not saved", HttpStatus.BAD_REQUEST);
         if(user.getId()!=0){
-            List<Integer> byUserID = demandService.findByUserID(user.getId());
+            List<DemandEntity> byUserID = demandService.findByUserID(user.getId());
             if(byUserID!=null && byUserID.size()>0)
                 return new ResponseEntity("user have demands", HttpStatus.BAD_REQUEST);
         }

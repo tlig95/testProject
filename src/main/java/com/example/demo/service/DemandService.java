@@ -10,5 +10,5 @@ public interface DemandService {
     public DemandEntity findById(int id);
     public List<DemandEntity> findAll();
     public void delete(DemandEntity demand);
-    public List<Integer> findByUserID(int id);
+    public List<DemandEntity> findByUserID(int id);
 }

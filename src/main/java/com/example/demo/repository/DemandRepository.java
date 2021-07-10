@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface DemandRepository extends JpaRepository<DemandEntity,Integer>
 {
-    @Query("SELECT r.id FROM demand_entity r where r.user_id = :id")
-    List<Integer> findByIdUser(@Param("id") int id);
+    @Query("SELECT r FROM DemandEntity r where r.user = :id")
+    List<DemandEntity> findByIdUser(@Param("id") int id);
 }
